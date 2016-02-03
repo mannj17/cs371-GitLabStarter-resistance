@@ -22,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
@@ -30,8 +34,12 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     private ArrayList<Bitmap> images;
 
     // instance variables containing widgets
+    int currentPostion;
     private ImageView imageView; // the view that shows the image
+    private TextView editText;
+    private Button copyName;
 
+    String[] spinnerNames;
     protected Button clear = null;
     protected EditText editTV= null;
 
@@ -53,13 +61,16 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
         // set instance variables for our widgets
         imageView = (ImageView)findViewById(R.id.imageView);
+        editText = (TextView)findViewById(R.id.editText);
+        copyName = (Button)findViewById(R.id.copyName);
+        copyName.setOnClickListener(this);
 
         // Set up the spinner so that it shows the names in the spinner array resources
         //
         // get spinner object
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
         // get array of strings
-        String[] spinnerNames = getResources().getStringArray(R.array.spinner_names);
+        spinnerNames = getResources().getStringArray(R.array.spinner_names);
         // create adapter with the strings
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, spinnerNames);
@@ -86,6 +97,17 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         // define a listener for the spinner
         spinner.setOnItemSelectedListener(new MySpinnerListener());
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if((v.getId() == R.id.copyName)){
+            String val = (String)editText.getText().toString();
+            editText.setText(val + spinnerNames[currentPostion]);
+        }
+        if(v.getId() == R.id.clearButton){
+            editTV.setText("");
+        }
     }
 
     /**
@@ -116,13 +138,6 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.clearButton){
-            editTV.setText("");
-        }
-    }
-
     /**
      * class that handles our spinner's selection events
      */
@@ -137,6 +152,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
                                    int position, long id) {
             // set the image to the one corresponding to the index selected by the spinner
             imageView.setImageBitmap(images.get(position));
+            currentPostion = position;
         }
 
         /**
