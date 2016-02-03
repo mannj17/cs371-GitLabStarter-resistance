@@ -16,11 +16,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import java.util.ArrayList;
 
-public class TextModActivity extends ActionBarActivity {
+public class TextModActivity extends ActionBarActivity implements View.OnClickListener {
 
     // array-list that contains our images to display
     private ArrayList<Bitmap> images;
@@ -28,6 +30,9 @@ public class TextModActivity extends ActionBarActivity {
     // instance variables containing widgets
     private ImageView imageView; // the view that shows the image
 
+    protected Button upperCase;
+    protected EditText sentence;
+    protected Button lowerCase;
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -73,6 +78,13 @@ public class TextModActivity extends ActionBarActivity {
         // define a listener for the spinner
         spinner.setOnItemSelectedListener(new MySpinnerListener());
 
+        upperCase = (Button)findViewById(R.id.upper);
+        upperCase.setOnClickListener(this);
+
+        lowerCase = (Button)findViewById(R.id.lower);
+        lowerCase.setOnClickListener(this);
+
+        sentence = (EditText)findViewById(R.id.userInput);
     }
 
     /**
@@ -101,6 +113,24 @@ public class TextModActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.upper){
+            CharSequence temp = sentence.getText();
+            String temp2 = temp.toString();
+            temp2 = temp2.toUpperCase();
+            CharSequence temp3 = (CharSequence)temp2;
+            sentence.setText(temp3);
+        }
+        if(v.getId() == R.id.lower){
+            CharSequence temp = sentence.getText();
+            String temp2 = temp.toString();
+            temp2 = temp2.toLowerCase();
+            CharSequence temp3 = (CharSequence)temp2;
+            sentence.setText(temp3);
+        }
     }
 
     /**
