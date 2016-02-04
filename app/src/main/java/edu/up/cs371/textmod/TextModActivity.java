@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +42,6 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     private Button copyName;
 
     private Button reverse;
-    private Button noSpaces;
     private TextView editText;
     protected Button upperCase = null;
     protected EditText sentence = null;
@@ -51,6 +49,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     String[] spinnerNames;
     protected Button clear = null;
     protected EditText editTV= null;
+
+    protected Button punctuation = null;
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -67,6 +67,9 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
         editTV = (EditText)findViewById(R.id.editText);
 
+        punctuation = (Button)findViewById(R.id.buttonNoPunctuation);
+        punctuation.setOnClickListener(this);
+
 
         // set instance variables for our widgets
         imageView = (ImageView)findViewById(R.id.imageView);
@@ -74,8 +77,6 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         editText = (TextView)findViewById(R.id.editText);
         copyName = (Button)findViewById(R.id.copyName);
         copyName.setOnClickListener(this);
-        noSpaces = (Button)findViewById(R.id.noSpaces);
-        noSpaces.setOnClickListener(this);
 
         // Set up the spinner so that it shows the names in the spinner array resources
         //
@@ -181,11 +182,14 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             buffer.reverse();
             this.editText.setText(buffer);
         }
-        if(v.getId() == R.id.noSpaces){
-            String val = this.editText.getText().toString();
-            val = val.replaceAll("\\s+", "");
-            this.editText.setText(val);
+        if(v.getId()== R.id.buttonNoPunctuation)
+        {
+            String test = this.editText.getText().toString();
+            test = test.replaceAll("[\\!\\.\\,\\?]","");
+            this.editText.setText(test);
+
         }
+             
  
     }
 
