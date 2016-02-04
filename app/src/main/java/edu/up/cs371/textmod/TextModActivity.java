@@ -30,6 +30,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -49,6 +50,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     String[] spinnerNames;
     protected Button clear = null;
     protected EditText editTV= null;
+    protected Button butters = null;
+
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -72,6 +75,9 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         editText = (TextView)findViewById(R.id.editText);
         copyName = (Button)findViewById(R.id.copyName);
         copyName.setOnClickListener(this);
+
+        butters = (Button)findViewById(R.id.butterJamButton);
+        butters.setOnClickListener(this);
 
         // Set up the spinner so that it shows the names in the spinner array resources
         //
@@ -148,6 +154,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        Random rand = new Random();
+        int randomNum;
         if(v.getId() == R.id.upper){
             CharSequence temp = sentence.getText();
             String temp2 = temp.toString();
@@ -177,7 +185,13 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             buffer.reverse();
             this.editText.setText(buffer);
         }
-             
+        if(v.getId() == R.id.butterJamButton){
+            String temp = this.editText.getText().toString();
+            String temp2 = null;
+            randomNum = rand.nextInt(temp.length()-2);
+            temp2 = temp.substring(1+randomNum) + temp.substring(0, 1+randomNum);
+            this.editTV.setText(temp2);
+        }
  
     }
 
