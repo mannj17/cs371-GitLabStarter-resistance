@@ -208,6 +208,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             this.editText.setText(test);
 
         }
+             
+ 
     }
     /**
      * class that handles our spinner's selection events
