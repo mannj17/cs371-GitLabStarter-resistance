@@ -73,7 +73,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         // get spinner object
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
         // get array of strings
-        String[] spinnerNames = getResources().getStringArray(R.array.spinner_names);
+        spinnerNames = getResources().getStringArray(R.array.spinner_names);
         // create adapter with the strings
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, spinnerNames);
