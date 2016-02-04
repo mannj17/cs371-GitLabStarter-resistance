@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TextModActivity extends ActionBarActivity implements View.OnClickListener {
 public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
 
     // array-list that contains our images to display
@@ -33,9 +32,9 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     // instance variables containing widgets
     private ImageView imageView; // the view that shows the image
 
-    protected Button upperCase;
-    protected EditText sentence;
-    protected Button lowerCase;
+    protected Button upperCase = null;
+    protected EditText sentence = null;
+    protected Button lowerCase = null;
     protected Button clear = null;
     protected EditText editTV= null;
 
@@ -96,7 +95,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         lowerCase = (Button)findViewById(R.id.lower);
         lowerCase.setOnClickListener(this);
 
-        sentence = (EditText)findViewById(R.id.userInput);
+        sentence = (EditText)findViewById(R.id.editText);
     }
 
     /**
@@ -143,10 +142,6 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             CharSequence temp3 = (CharSequence)temp2;
             sentence.setText(temp3);
         }
-    }
-
-    @Override
-    public void onClick(View v) {
         if(v.getId() == R.id.clearButton){
             editTV.setText("");
         }
