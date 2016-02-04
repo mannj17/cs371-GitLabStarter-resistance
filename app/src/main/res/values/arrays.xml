@@ -10,9 +10,9 @@
         <item>@mipmap/nuxoll</item>
         <item>@mipmap/vegdahl</item>
         <item>@mipmap/larson</item>
+        <item>@mipmap/jess_pic</item>
         <item>@mipmap/parker</item>
         <item>@mipmap/scotch_pic</item>
-        <item>@mipmap/jess_pic</item>
     </array>
 
     <string-array name="spinner_names">
