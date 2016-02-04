@@ -16,11 +16,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
-public class TextModActivity extends ActionBarActivity {
+public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
 
     // array-list that contains our images to display
     private ArrayList<Bitmap> images;
@@ -28,6 +31,8 @@ public class TextModActivity extends ActionBarActivity {
     // instance variables containing widgets
     private ImageView imageView; // the view that shows the image
 
+    private Button reverse;
+    private TextView editText;
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -40,6 +45,7 @@ public class TextModActivity extends ActionBarActivity {
 
         // set instance variables for our widgets
         imageView = (ImageView)findViewById(R.id.imageView);
+        editText = (TextView)findViewById(R.id.editText);
 
         // Set up the spinner so that it shows the names in the spinner array resources
         //
@@ -68,6 +74,10 @@ public class TextModActivity extends ActionBarActivity {
             // load the image; add to arraylist
             Bitmap img = BitmapFactory.decodeResource(getResources(), id);
             images.add(img);
+
+            reverse = (Button)findViewById(R.id.buttonReverse);
+            reverse.setOnClickListener(this);
+
         }
 
         // define a listener for the spinner
@@ -103,6 +113,17 @@ public class TextModActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.buttonReverse)
+        {
+            String input = this.editText.getText().toString();
+            StringBuffer buffer = new StringBuffer(input);
+            buffer.reverse();
+            this.editText.setText(buffer);
+        }
+    }
+
     /**
      * class that handles our spinner's selection events
      */
@@ -127,5 +148,6 @@ public class TextModActivity extends ActionBarActivity {
         public void onNothingSelected(AdapterView<?> parentView) {
             // your code here
         }
+
     }
 }
