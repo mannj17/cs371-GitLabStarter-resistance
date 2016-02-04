@@ -138,7 +138,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Punctuation"
+            android:text="No Punc"
             android:id="@+id/buttonNoPunctuation"
             android:textSize="@dimen/button_font_size"
             android:textColor="@color/button_text_color"
@@ -152,7 +152,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="randomCharacter"
+            android:text="random"
             android:id="@+id/randomCharacter"
             android:textColor="@color/button_text_color"
             android:textSize="@dimen/button_font_size"
