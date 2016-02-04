@@ -30,6 +30,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -49,6 +50,9 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     String[] spinnerNames;
     protected Button clear = null;
     protected EditText editTV= null;
+    protected Button randChar = null;
+    protected Random character;
+    String[] randoms;
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -115,7 +119,12 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         lowerCase = (Button)findViewById(R.id.lower);
         lowerCase.setOnClickListener(this);
 
+        randChar = (Button)findViewById(R.id.randomCharacter);
+        randChar.setOnClickListener(this);
+
         sentence = (EditText)findViewById(R.id.editText);
+
+        randoms = getResources().getStringArray(R.array.random_chars);
     }
 
     /**
@@ -148,6 +157,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        Random rand = new Random();
         if(v.getId() == R.id.upper){
             CharSequence temp = sentence.getText();
             String temp2 = temp.toString();
@@ -177,7 +187,18 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             buffer.reverse();
             this.editText.setText(buffer);
         }
-             
+        if(v.getId() == R.id.randomCharacter){
+            CharSequence temp = sentence.getText();
+            int tempChar = rand.nextInt(randoms.length);
+            int tempSpot = rand.nextInt(temp.length());
+            CharSequence temp2 = temp.subSequence(0,tempSpot);
+            String temp3 = temp2.toString();
+            CharSequence temp4 = temp.subSequence(tempSpot,temp.length());
+            String temp5 = temp4.toString();
+            String finalTemp = temp3 + randoms[tempChar] + temp5;
+            CharSequence finalChar = (CharSequence)finalTemp;
+            sentence.setText(finalTemp);
+        }
  
     }
 
