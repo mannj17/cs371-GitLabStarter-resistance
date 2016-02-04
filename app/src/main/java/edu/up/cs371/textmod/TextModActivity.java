@@ -54,6 +54,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     protected Random character;
     String[] randoms;
 
+    protected Button punctuation = null;
+
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -68,6 +70,9 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         clear.setOnClickListener(this);
 
         editTV = (EditText)findViewById(R.id.editText);
+
+        punctuation = (Button)findViewById(R.id.buttonNoPunctuation);
+        punctuation.setOnClickListener(this);
 
 
         // set instance variables for our widgets
@@ -193,12 +198,14 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             int tempSpot = rand.nextInt(temp.length());
             CharSequence temp2 = temp.subSequence(0,tempSpot);
             String temp3 = temp2.toString();
-            CharSequence temp4 = temp.subSequence(tempSpot,temp.length());
+            CharSequence temp4 = temp.subSequence(tempSpot+1,temp.length());
             String temp5 = temp4.toString();
             String finalTemp = temp3 + randoms[tempChar] + temp5;
             CharSequence finalChar = (CharSequence)finalTemp;
             sentence.setText(finalTemp);
+
         }
+             
  
     }
 
