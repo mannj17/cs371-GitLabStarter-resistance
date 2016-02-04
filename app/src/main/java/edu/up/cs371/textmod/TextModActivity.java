@@ -51,6 +51,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     protected EditText editTV= null;
 
     protected Button punctuation = null;
+    protected Button noSpace = null;
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -69,6 +70,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
         punctuation = (Button)findViewById(R.id.buttonNoPunctuation);
         punctuation.setOnClickListener(this);
+        noSpace = (Button)findViewById(R.id.noSpace);
+        noSpace.setOnClickListener(this);
 
 
         // set instance variables for our widgets
@@ -189,8 +192,12 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             this.editText.setText(test);
 
         }
-             
- 
+        if(v.getId()== R.id.noSpace)
+        {
+            String val = this.editText.getText().toString();
+            val = val.replaceAll("\\s+","");
+            this.editText.setText(val);
+        }
     }
 
     /**
