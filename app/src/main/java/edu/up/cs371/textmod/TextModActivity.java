@@ -53,6 +53,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     protected Button butters = null;
 
 
+    protected Button punctuation = null;
+
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -67,6 +69,9 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         clear.setOnClickListener(this);
 
         editTV = (EditText)findViewById(R.id.editText);
+
+        punctuation = (Button)findViewById(R.id.buttonNoPunctuation);
+        punctuation.setOnClickListener(this);
 
 
         // set instance variables for our widgets
@@ -184,6 +189,13 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             StringBuffer buffer = new StringBuffer(input);
             buffer.reverse();
             this.editText.setText(buffer);
+        }
+        if(v.getId()== R.id.buttonNoPunctuation)
+        {
+            String test = this.editText.getText().toString();
+            test = test.replaceAll("[\\!\\.\\,\\?]","");
+            this.editText.setText(test);
+
         }
         if(v.getId() == R.id.butterJamButton){
             String temp = this.editText.getText().toString();
