@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,6 +43,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     private Button copyName;
 
     private Button reverse;
+    private Button noSpaces;
     private TextView editText;
     protected Button upperCase = null;
     protected EditText sentence = null;
@@ -72,6 +74,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         editText = (TextView)findViewById(R.id.editText);
         copyName = (Button)findViewById(R.id.copyName);
         copyName.setOnClickListener(this);
+        noSpaces = (Button)findViewById(R.id.noSpaces);
+        noSpaces.setOnClickListener(this);
 
         // Set up the spinner so that it shows the names in the spinner array resources
         //
@@ -177,7 +181,11 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             buffer.reverse();
             this.editText.setText(buffer);
         }
-             
+        if(v.getId() == R.id.noSpaces){
+            String val = this.editText.getText().toString();
+            val = val.replaceAll("\\s+", "");
+            this.editText.setText(val);
+        }
  
     }
 
