@@ -9,6 +9,7 @@
         <item>@mipmap/kitten</item>
         <item>@mipmap/nuxoll</item>
         <item>@mipmap/vegdahl</item>
+        <item>@mipmap/parker</item>
         <item>@mipmap/scotch_pic</item>
         <item>@mipmap/jess_pic</item>
     </array>
@@ -18,6 +19,7 @@
         <item>Dr. Andrew Nuxoll</item>
         <item>Dr. Steven Vegdahl</item>
         <item>Jess Mann</item>
+        <item>Parker Schibel</item>
         <item>Scotch</item>
     </string-array>
 
