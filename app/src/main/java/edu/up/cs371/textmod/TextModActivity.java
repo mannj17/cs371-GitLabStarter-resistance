@@ -39,7 +39,6 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     // instance variables containing widgets
     int currentPostion;
     private ImageView imageView; // the view that shows the image
-    private TextView editText;
     private Button copyName;
 
     private Button reverse;
