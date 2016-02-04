@@ -17,9 +17,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import android.widget.TextView;
+
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -29,10 +37,20 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     private ArrayList<Bitmap> images;
 
     // instance variables containing widgets
+    int currentPostion;
     private ImageView imageView; // the view that shows the image
+    private TextView editText;
+    private Button copyName;
 
     private Button reverse;
     private TextView editText;
+    protected Button upperCase = null;
+    protected EditText sentence = null;
+    protected Button lowerCase = null;
+    String[] spinnerNames;
+    protected Button clear = null;
+    protected EditText editTV= null;
+
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -43,16 +61,25 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_mod);
 
+        clear = (Button)findViewById(R.id.clearButton); //sets the clear button and listener
+        clear.setOnClickListener(this);
+
+        editTV = (EditText)findViewById(R.id.editText);
+
+
         // set instance variables for our widgets
         imageView = (ImageView)findViewById(R.id.imageView);
         editText = (TextView)findViewById(R.id.editText);
+        editText = (TextView)findViewById(R.id.editText);
+        copyName = (Button)findViewById(R.id.copyName);
+        copyName.setOnClickListener(this);
 
         // Set up the spinner so that it shows the names in the spinner array resources
         //
         // get spinner object
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
         // get array of strings
-        String[] spinnerNames = getResources().getStringArray(R.array.spinner_names);
+        spinnerNames = getResources().getStringArray(R.array.spinner_names);
         // create adapter with the strings
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, spinnerNames);
@@ -83,6 +110,13 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         // define a listener for the spinner
         spinner.setOnItemSelectedListener(new MySpinnerListener());
 
+        upperCase = (Button)findViewById(R.id.upper);
+        upperCase.setOnClickListener(this);
+
+        lowerCase = (Button)findViewById(R.id.lower);
+        lowerCase.setOnClickListener(this);
+
+        sentence = (EditText)findViewById(R.id.editText);
     }
 
     /**
@@ -115,6 +149,28 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.upper){
+            CharSequence temp = sentence.getText();
+            String temp2 = temp.toString();
+            temp2 = temp2.toUpperCase();
+            CharSequence temp3 = (CharSequence)temp2;
+            sentence.setText(temp3);
+        }
+        if(v.getId() == R.id.lower){
+            CharSequence temp = sentence.getText();
+            String temp2 = temp.toString();
+            temp2 = temp2.toLowerCase();
+            CharSequence temp3 = (CharSequence)temp2;
+            sentence.setText(temp3);
+        }
+        if((v.getId() == R.id.copyName)){
+            String val = (String)editText.getText().toString();
+            editText.setText(val + spinnerNames[currentPostion]);
+        }
+        if(v.getId() == R.id.clearButton){
+            editTV.setText("");
+            
+        }
         if(v.getId() == R.id.buttonReverse)
         {
             String input = this.editText.getText().toString();
@@ -122,6 +178,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             buffer.reverse();
             this.editText.setText(buffer);
         }
+             
+ 
     }
 
     /**
@@ -138,6 +196,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
                                    int position, long id) {
             // set the image to the one corresponding to the index selected by the spinner
             imageView.setImageBitmap(images.get(position));
+            currentPostion = position;
         }
 
         /**
@@ -148,6 +207,5 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         public void onNothingSelected(AdapterView<?> parentView) {
             // your code here
         }
-
     }
 }
