@@ -22,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
@@ -30,11 +34,15 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     private ArrayList<Bitmap> images;
 
     // instance variables containing widgets
+    int currentPostion;
     private ImageView imageView; // the view that shows the image
+    private TextView editText;
+    private Button copyName;
 
     protected Button upperCase = null;
     protected EditText sentence = null;
     protected Button lowerCase = null;
+    String[] spinnerNames;
     protected Button clear = null;
     protected EditText editTV= null;
 
@@ -56,6 +64,9 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
         // set instance variables for our widgets
         imageView = (ImageView)findViewById(R.id.imageView);
+        editText = (TextView)findViewById(R.id.editText);
+        copyName = (Button)findViewById(R.id.copyName);
+        copyName.setOnClickListener(this);
 
         // Set up the spinner so that it shows the names in the spinner array resources
         //
@@ -142,6 +153,10 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             CharSequence temp3 = (CharSequence)temp2;
             sentence.setText(temp3);
         }
+        if((v.getId() == R.id.copyName)){
+            String val = (String)editText.getText().toString();
+            editText.setText(val + spinnerNames[currentPostion]);
+        }
         if(v.getId() == R.id.clearButton){
             editTV.setText("");
         }
@@ -161,6 +176,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
                                    int position, long id) {
             // set the image to the one corresponding to the index selected by the spinner
             imageView.setImageBitmap(images.get(position));
+            currentPostion = position;
         }
 
         /**
