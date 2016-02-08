@@ -53,6 +53,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     protected Button randChar = null;
     protected Random character;
     String[] randoms;
+    protected Button butters = null;
+
 
     protected Button punctuation = null;
     protected Button noSpace = null;
@@ -84,6 +86,9 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         editText = (TextView)findViewById(R.id.editText);
         copyName = (Button)findViewById(R.id.copyName);
         copyName.setOnClickListener(this);
+
+        butters = (Button)findViewById(R.id.butterJamButton);
+        butters.setOnClickListener(this);
 
         // Set up the spinner so that it shows the names in the spinner array resources
         //
@@ -166,6 +171,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         Random rand = new Random();
+        int randomNum;
         if(v.getId() == R.id.upper){
             CharSequence temp = sentence.getText();
             String temp2 = temp.toString();
@@ -202,6 +208,14 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             this.editText.setText(test);
 
         }
+        if(v.getId() == R.id.butterJamButton){
+            String temp = this.editText.getText().toString();
+            String temp2 = null;
+            randomNum = rand.nextInt(temp.length()-2);
+            temp2 = temp.substring(1+randomNum) + temp.substring(0, 1+randomNum);
+            this.editTV.setText(temp2);
+        }
+ 
         if(v.getId()== R.id.noSpace)
         {
             String val = this.editText.getText().toString();
